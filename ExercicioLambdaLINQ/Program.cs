@@ -23,15 +23,24 @@ namespace ExercicioLambdaLINQ {
                     ProdList.Add(new Products(name, price));
                 }
             }
-            var avg = ProdList.Select(p => p.Price).Average();
+            // var avg = ProdList.Select(p => p.Price).Average(); <-- Utilizando expressão lambda
+            var avg =
+                (from p in ProdList          // <-- Utilizando expressão SQL.
+                 select p.Price).Average();
             Console.WriteLine("Average Price: R$ " + avg.ToString("F2", CultureInfo.InvariantCulture));
 
-            var ProductName = ProdList.Where(p => p.Price < avg).OrderByDescending(p => p.Name).Select(p => p.Name);
+            // var ProductName = ProdList.Where(p => p.Price < avg)
+            // .OrderByDescending(p => p.Name).Select(p => p.Name);  <-- Utilizando expressão lambda.
+
+            var ProductName = 
+                (from p in ProdList
+                where p.Price < 900          // <-- Utilizando expressão SQL.
+                orderby p.Name descending
+                select p.Name);
 
             foreach (var x in ProductName) {
-                Console.WriteLine(x);
+                Console.WriteLine(x);       // <-- Buscando as informações dentro do ProductName.
             }
-
         }
     }
 }
