@@ -1,0 +1,6 @@
+tv,900.00
+mouse, 50.00
+tablet, 350.50
+hd case, 80.90
+computer, 850.00
+monitor, 290.00
